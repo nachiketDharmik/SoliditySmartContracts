@@ -1,0 +1,31 @@
+reference: https://forum.openzeppelin.com/t/openzeppelin-upgrades-step-by-step-tutorial-for-hardhat/3580
+youtube : https://www.youtube.com/watch?v=bdXJmWajZRY
+
+Steps:
+1. cmd: npx hardhat
+2. Select "Create javascript project"
+3. Install the Hardhat Upgrades plugin.
+   cmd: npm install --save-dev @openzeppelin/hardhat-upgrades
+4. We use ethers, so we also need to install.
+   cmd: npm install --save-dev @nomiclabs/hardhat-ethers ethers 
+
+5. Go-to  hardhat.config.js and add below two files
+   require("@nomiclabs/hardhat-ethers");
+   require('@openzeppelin/hardhat-upgrades');
+
+6. create contract BOX.sol and write test for BOX contract.
+   cmd: npx hardhat test
+7. Now deploy contract to public network so we write the deploy.js script in script folder
+   cmd: npx hardhat run scripts/deploy.js
+
+
+NOTE: Above 7 steps will deploy implementation , proxy and admin contract . Now we change the implementation contract from BOX to BOXv2.
+
+8. Write the BoxV2.sol contract in contracts folder .
+9. Write the test for BoxV2 contract in test folder BoxV2.proxy.js
+   cmd: npx hardhat test
+
+10. Now deploy the new implementation on public network so we write the deploy_implementation_upgrade.js in scripts folder 
+    cmd: npx hardhat run scripts/deploy_implementation_upgrade.js
+
+   
